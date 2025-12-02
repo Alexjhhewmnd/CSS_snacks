@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Snacks - Creative Secondary School</title>
+    <title>CSS Snacks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -416,7 +416,9 @@
             transition: all 0.3s;
         }
         
+        /* FIX: Added display:flex to ensure modal appears when active */
         .modal.active {
+            display: flex; 
             opacity: 1;
             visibility: visible;
         }
@@ -543,11 +545,7 @@
             margin-bottom: 3rem;
         }
         
-        /* Login Modal */
-        .login-modal {
-            display: none;
-        }
-        
+        /* Login Modal - uses base .modal class now */
         .login-box {
             background-color: white;
             padding: 2.5rem;
@@ -703,6 +701,82 @@
         }
         
         .logout-btn:hover {
+            background-color: #c82333;
+        }
+        
+        /* New Filter Button Styles for Admin */
+        .btn-filter {
+            background-color: var(--gray);
+            color: var(--gray-dark);
+            border: 1px solid var(--gray);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-filter:hover {
+            background-color: var(--gray-dark);
+            color: white;
+        }
+        
+        .btn-filter.active {
+            background-color: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+        
+        .btn-filter.active:hover {
+            background-color: var(--secondary-dark);
+        }
+
+        /* Styles for the current products list in admin panel */
+        .admin-product-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 10px;
+            border: 1px solid var(--gray);
+            border-radius: 8px;
+            background-color: white;
+        }
+        
+        .admin-product-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+        
+        .admin-product-info {
+            flex-grow: 1;
+        }
+        
+        .admin-product-info h4 {
+            margin: 0;
+            color: var(--primary);
+        }
+        
+        .admin-product-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+        
+        .admin-product-actions button {
+            background-color: var(--danger);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .admin-product-actions button:hover {
             background-color: #c82333;
         }
         
@@ -933,14 +1007,55 @@
                 <div>
                     <h3>Admin Dashboard - Pending Orders: <span id="pending-count">0</span></h3>
                     <p>Manage student snack orders and update delivery status.</p>
+                    <div style="margin-top: 15px;">
+                        <button class="btn" id="show-orders-btn">Order Management</button>
+                        <button class="btn btn-secondary" id="show-products-btn">Product Management</button>
+                    </div>
                 </div>
                 <div>
                     <button class="btn" id="refresh-orders">Refresh Orders</button>
                     <button class="btn logout-btn" id="logout-btn">Logout</button>
                 </div>
             </div>
-            <div id="orders-container">
+            
+            <div id="admin-orders-view">
+                <div style="margin-bottom: 1rem; display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn-filter status-filter active" data-status="all">All Orders</button>
+                    <button class="btn-filter status-filter" data-status="pending">Pending</button>
+                    <button class="btn-filter status-filter" data-status="processed">Processed</button>
+                    <button class="btn-filter status-filter" data-status="delivered">Delivered</button>
                 </div>
+                <div id="orders-container">
+                    </div>
+            </div>
+            
+            <div id="admin-products-view" style="display: none;">
+                <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Add New Product</h3>
+                <form id="add-product-form" class="order-card" style="border-left: 5px solid var(--secondary);">
+                    <div class="form-group">
+                        <label for="new-product-name-en">Product Name (EN)</label>
+                        <input type="text" id="new-product-name-en" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-product-name-zh">Product Name (ZH)</label>
+                        <input type="text" id="new-product-name-zh" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-product-price">Price ($)</label>
+                        <input type="number" step="0.01" min="0.01" id="new-product-price" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-product-image">Image URL</label>
+                        <input type="url" id="new-product-image" class="form-control" placeholder="https://..." required>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Add Product</button>
+                </form>
+                
+                <h3 style="color: var(--primary); margin-top: 3rem; margin-bottom: 1.5rem;">Current Products</h3>
+                <div id="current-products-list">
+                    </div>
+            </div>
+            
         </section>
     </main>
 
@@ -955,7 +1070,7 @@
                     </div>
                 <div class="cart-total">
                     <span>Total:</span>
-                    <span id="cart-total-price">HKD$0.00</span>
+                    <span id="cart-total-price">$0.00</span>
                 </div>
             </div>
             <div class="modal-footer">
@@ -989,16 +1104,17 @@
                 <div class="footer-column">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#products">Products</a></li>
-                        <li><a href="#order-link">My Orders</a></li>
-                        <li><a href="#admin-link">Admin</a></li>
+                        <li><a href="#" id="footer-home">Home</a></li>
+                        <li><a href="#" id="footer-products">Products</a></li>
+                        <li><a href="#" id="footer-orders">My Orders</a></li>
+                        <li><a href="#" id="footer-admin">Admin</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>School Info</h3>
                     <ul>
                         <li>Creative Secondary School</li>
+                        <li>3 Pung Loi Road, Tseung Kwan O</li>
                         <li>Snack Hours: 8:00 AM - 3:15 PM</li>
                         <li>Delivery to lockers only</li>
                     </ul>
@@ -1023,6 +1139,7 @@
                 heroSubtitle: "Exclusively for Creative Secondary School students. Order your favorite snacks online and we'll deliver them to your locker during break time!",
                 orderNow: "Order Now",
                 sectionTitle: "Our Snack Selection",
+                productDescription: "Premium pork selected and traditionally crafted, with a sweet and chewy texture. Perfect snack to recharge energy during breaks.",
                 addToCart: "Add to Cart",
                 yourCart: "Your Cart",
                 close: "Close",
@@ -1065,10 +1182,27 @@
                 footerAboutText: "Exclusive snack delivery service for Creative Secondary School students. Order online, get snacks delivered to your locker.",
                 footerQuickLinks: "Quick Links",
                 footerSchoolInfo: "School Info",
-                // footerAddress: "3 Pung Loi Road, Tseung Kwan O", // REMOVED
+                footerAddress: "3 Pung Loi Road, Tseung Kwan O",
                 footerHours: "Snack Hours: 8:00 AM - 3:15 PM",
                 footerDelivery: "Delivery to lockers only",
-                copyright: "&copy; 2025 CSS Snacks. Exclusive service for Creative Secondary School students."
+                copyright: "&copy; 2025 CSS Snacks. Exclusive service for Creative Secondary School students.",
+                // NEW ADMIN STRINGS
+                adminOrderManagement: "Order Management",
+                adminProductManagement: "Product Management",
+                allOrders: "All Orders",
+                addProductTitle: "Add New Product",
+                currentProductsTitle: "Current Products",
+                productNameEN: "Product Name (EN)",
+                productNameZH: "Product Name (ZH)",
+                productPrice: "Price ($)",
+                imageURL: "Image URL",
+                addProductButton: "Add Product",
+                noOrdersFiltered: "No orders found for this filter.",
+                noProducts: "No products in the catalog.",
+                delete: "Delete",
+                itemDeleted: "{name} deleted successfully!",
+                productAdded: "{name} added successfully!",
+                fillAllFields: "Please fill out all product fields correctly."
             },
             zh: {
                 siteTitle: "CSS 零食 - 创新中学",
@@ -1080,6 +1214,7 @@
                 heroSubtitle: "专为创新中学学生提供。在线订购您喜爱的零食，我们会在课间休息时送到您的储物柜！",
                 orderNow: "立即订购",
                 sectionTitle: "我们的零食选择",
+                productDescription: "精选优质猪肉，传统工艺制作，口感香甜有嚼劲，是课间补充能量的理想零食。",
                 addToCart: "加入购物车",
                 yourCart: "您的购物车",
                 close: "关闭",
@@ -1122,10 +1257,27 @@
                 footerAboutText: "专为创新中学学生提供的零食配送服务。在线订购，零食送到您的储物柜。",
                 footerQuickLinks: "快速链接",
                 footerSchoolInfo: "学校信息",
-                // footerAddress: "将军澳蓬萊路3號", // REMOVED
+                footerAddress: "将军澳蓬萊路3號",
                 footerHours: "零食时间: 上午8:00 - 下午3:15",
                 footerDelivery: "仅配送至储物柜",
-                copyright: "&copy; 2025 CSS 零食。专为创新中学学生提供的服务。"
+                copyright: "&copy; 2025 CSS 零食。专为创新中学学生提供的服务。",
+                // NEW ADMIN STRINGS
+                adminOrderManagement: "订单管理",
+                adminProductManagement: "产品管理",
+                allOrders: "所有订单",
+                addProductTitle: "添加新产品",
+                currentProductsTitle: "现有产品",
+                productNameEN: "产品名称 (EN)",
+                productNameZH: "产品名称 (ZH)",
+                productPrice: "价格 ($)",
+                imageURL: "图片链接",
+                addProductButton: "添加产品",
+                noOrdersFiltered: "在此筛选条件下未找到订单。",
+                noProducts: "产品目录中没有产品。",
+                delete: "删除",
+                itemDeleted: "{name} 已成功删除！",
+                productAdded: "{name} 添加成功！",
+                fillAllFields: "请正确填写所有产品字段。"
             }
         };
         
@@ -1133,7 +1285,7 @@
         let currentLang = localStorage.getItem('cssSnacksLang') || 'en';
         
         // Sample snack products - only 肉脯
-        const products = [
+        const defaultProducts = [
             { 
                 id: 1, 
                 name: {
@@ -1141,13 +1293,21 @@
                     zh: "肉脯"
                 }, 
                 description: {
-                    en: "Premium pork selected and traditionally crafted, with a sweet and chewy texture. Perfect snack to recharge energy during breaks.",
-                    zh: "精选优质猪肉，传统工艺制作，口感香甜有嚼劲，是课间补充能量的理想零食。"
+                    en: translations.en.productDescription,
+                    zh: translations.zh.productDescription
                 }, 
-                price: 20.00, 
+                price: 18.50, 
                 image: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1501719191858839580~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1780203061&x-signature=W4ca5TaZVw0%2Bo0wuAQQnLYZSJ0Y%3D" 
             }
         ];
+        
+        // Load products from storage, or use default if none exist
+        let products = JSON.parse(localStorage.getItem('cssSnacksProducts')) || defaultProducts;
+
+        // Save products to localStorage
+        function saveProductsToStorage() {
+            localStorage.setItem('cssSnacksProducts', JSON.stringify(products));
+        }
 
         // Admin password
         const ADMIN_PASSWORD = "9348573";
@@ -1156,6 +1316,7 @@
         let cart = JSON.parse(localStorage.getItem('cssSnacksCart')) || [];
         let orders = JSON.parse(localStorage.getItem('cssSnacksOrders')) || [];
         let isAdminLoggedIn = false;
+        let currentOrderFilter = 'all'; // New state for admin order filtering
 
         // DOM Elements
         const productsGrid = document.getElementById('products-grid');
@@ -1182,9 +1343,23 @@
         const cancelLogin = document.getElementById('cancel-login');
         const logoutBtn = document.getElementById('logout-btn');
         const languageToggle = document.getElementById('language-toggle');
+        
+        // New Admin DOM Elements
+        const adminOrdersView = document.getElementById('admin-orders-view');
+        const adminProductsView = document.getElementById('admin-products-view');
+        const showOrdersBtn = document.getElementById('show-orders-btn');
+        const showProductsBtn = document.getElementById('show-products-btn');
+        const addProductForm = document.getElementById('add-product-form');
+        const currentProductsList = document.getElementById('current-products-list');
+
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize products in storage if it's the first load
+            if (!localStorage.getItem('cssSnacksProducts')) {
+                saveProductsToStorage();
+            }
+            
             renderProducts();
             updateCartCount();
             setupEventListeners();
@@ -1244,6 +1419,22 @@
             document.getElementById('refresh-orders').textContent = translations[currentLang].refreshOrders;
             document.getElementById('logout-btn').textContent = translations[currentLang].logout;
             
+            // NEW ADMIN STRINGS
+            document.getElementById('show-orders-btn').textContent = translations[currentLang].adminOrderManagement;
+            document.getElementById('show-products-btn').textContent = translations[currentLang].adminProductManagement;
+            document.querySelector('#admin-products-view h3:nth-child(1)').textContent = translations[currentLang].addProductTitle;
+            document.querySelector('#admin-products-view h3:nth-child(2)').textContent = translations[currentLang].currentProductsTitle;
+            document.querySelector('label[for="new-product-name-en"]').textContent = translations[currentLang].productNameEN;
+            document.querySelector('label[for="new-product-name-zh"]').textContent = translations[currentLang].productNameZH;
+            document.querySelector('label[for="new-product-price"]').textContent = translations[currentLang].productPrice;
+            document.querySelector('label[for="new-product-image"]').textContent = translations[currentLang].imageURL;
+            document.querySelector('#add-product-form button[type="submit"]').textContent = translations[currentLang].addProductButton;
+            document.querySelector('.status-filter[data-status="all"]').textContent = translations[currentLang].allOrders;
+            document.querySelector('.status-filter[data-status="pending"]').textContent = translations[currentLang].pending;
+            document.querySelector('.status-filter[data-status="processed"]').textContent = translations[currentLang].processed;
+            document.querySelector('.status-filter[data-status="delivered"]').textContent = translations[currentLang].delivered;
+
+            
             // Login modal
             document.querySelector('#login-modal h3').textContent = translations[currentLang].adminLogin;
             document.querySelector('#login-modal p').textContent = translations[currentLang].enterPassword;
@@ -1257,13 +1448,15 @@
             document.querySelector('.footer-column:nth-child(2) h3').textContent = translations[currentLang].footerQuickLinks;
             document.querySelector('.footer-column:nth-child(3) h3').textContent = translations[currentLang].footerSchoolInfo;
             
-            // Update order status text if admin is logged in
+            // Update content based on current view
+            renderProducts(); // Re-render products to update name/description
             if (isAdminLoggedIn) {
-                renderOrders();
+                if (adminOrdersView.style.display !== 'none') {
+                    renderOrders();
+                } else if (adminProductsView.style.display !== 'none') {
+                    renderCurrentProducts();
+                }
             }
-            
-            // **FIX: Re-render products to apply language change to descriptions**
-            renderProducts(); 
             
             // Update cart items if cart is open
             if (cartModal.classList.contains('active')) {
@@ -1291,6 +1484,11 @@
             productsGrid.innerHTML = '';
             
             // Create loading skeleton while images load
+            if (products.length === 0) {
+                 productsGrid.innerHTML = '<p style="text-align: center; padding: 2rem; grid-column: 1 / -1;">' + translations[currentLang].noProducts + '</p>';
+                 return;
+            }
+            
             const skeletonCard = document.createElement('div');
             skeletonCard.className = 'product-card';
             skeletonCard.innerHTML = `
@@ -1326,12 +1524,15 @@
                     img.style.transition = 'opacity 0.5s';
                     
                     img.onload = function() {
+                        // Find the spinner container and remove the spinner when image loads
+                        const spinnerContainer = productCard.querySelector('.product-img > div');
+                        if (spinnerContainer) spinnerContainer.remove();
                         img.style.opacity = '1';
                     };
                     
                     productCard.innerHTML = `
                         <div class="product-img">
-                            <div class="w-full h-full flex items-center justify-center bg-gray">
+                            <div style="position: absolute; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background-color: #f0f0f0;">
                                 <i class="fas fa-spinner fa-spin text-4xl text-gray-400"></i>
                             </div>
                         </div>
@@ -1339,7 +1540,7 @@
                             <h3>${product.name[currentLang]}</h3>
                             <p>${product.description[currentLang]}</p>
                             <div class="product-price">
-                                <span class="price">HKD$${product.price.toFixed(2)}</span>
+                                <span class="price">$${product.price.toFixed(2)}</span>
                                 <button class="add-to-cart" data-id="${product.id}">
                                     <i class="fas fa-plus"></i>
                                 </button>
@@ -1349,7 +1550,6 @@
                     
                     // Replace the spinner with the actual image
                     const imgContainer = productCard.querySelector('.product-img');
-                    imgContainer.innerHTML = '';
                     imgContainer.appendChild(img);
                     
                     productsGrid.appendChild(productCard);
@@ -1405,12 +1605,58 @@
                     showLoginModal();
                 }
             });
+            
+            // Footer Navigation Links (RESTORED FUNCTIONALITY)
+            document.getElementById('footer-home').addEventListener('click', function(e) {
+                e.preventDefault();
+                showHomePage();
+                window.scrollTo(0, 0);
+            });
+            
+            document.getElementById('footer-products').addEventListener('click', function(e) {
+                e.preventDefault();
+                showHomePage();
+                document.getElementById('products').scrollIntoView();
+            });
+
+            document.getElementById('footer-orders').addEventListener('click', function(e) {
+                e.preventDefault();
+                showCheckoutPage();
+                window.scrollTo(0, 0);
+            });
+
+            document.getElementById('footer-admin').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (isAdminLoggedIn) {
+                    showAdminPage();
+                } else {
+                    showLoginModal();
+                }
+                window.scrollTo(0, 0);
+            });
 
             // Checkout form submission
             checkoutForm.addEventListener('submit', placeOrder);
 
             // Refresh orders button
             refreshOrders.addEventListener('click', renderOrders);
+            
+            // Admin Orders/Products View Toggle
+            showOrdersBtn.addEventListener('click', showOrderManagementPage);
+            showProductsBtn.addEventListener('click', showProductManagementPage);
+            
+            // Admin Order Status Filters
+            document.querySelectorAll('.status-filter').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.status-filter').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentOrderFilter = this.getAttribute('data-status');
+                    renderOrders(); // Re-render with new filter
+                });
+            });
+            
+            // Add Product Form Submission
+            addProductForm.addEventListener('submit', handleAddProduct);
 
             // Login functionality
             loginBtn.addEventListener('click', handleLogin);
@@ -1449,6 +1695,8 @@
         function addToCart(productId) {
             const product = products.find(p => p.id === productId);
             const existingItem = cart.find(item => item.id === productId);
+
+            if (!product) return; // Should not happen
 
             if (existingItem) {
                 existingItem.quantity += 1;
@@ -1524,7 +1772,7 @@
         function renderCartItems() {
             if (cart.length === 0) {
                 cartItems.innerHTML = '<p style="text-align: center; padding: 2rem;">' + translations[currentLang].cartEmpty + '</p>';
-                cartTotalPrice.textContent = 'HKD$0.00';
+                cartTotalPrice.textContent = '$0.00';
                 checkoutBtn.disabled = true;
                 return;
             }
@@ -1542,7 +1790,7 @@
                 cartItem.innerHTML = `
                     <div class="item-info">
                         <h4>${item.name}</h4>
-                        <p>HKD$${item.price.toFixed(2)} each</p>
+                        <p>$${item.price.toFixed(2)} each</p>
                     </div>
                     <div class="item-actions">
                         <div class="quantity-control">
@@ -1550,7 +1798,7 @@
                             <span>${item.quantity}</span>
                             <button class="quantity-btn increase" data-id="${item.id}">+</button>
                         </div>
-                        <div class="item-price">HKD$${itemTotal.toFixed(2)}</div>
+                        <div class="item-price">$${itemTotal.toFixed(2)}</div>
                         <button class="remove-item" data-id="${item.id}">
                             <i class="fas fa-trash"></i>
                         </button>
@@ -1559,7 +1807,7 @@
                 cartItems.appendChild(cartItem);
             });
 
-            cartTotalPrice.textContent = `HKD$${total.toFixed(2)}`;
+            cartTotalPrice.textContent = `$${total.toFixed(2)}`;
 
             // Add event listeners to quantity buttons and remove buttons
             document.querySelectorAll('.decrease').forEach(btn => {
@@ -1638,12 +1886,12 @@
             orderLink.classList.add('active');
             
             // Pre-fill form if there's a recent order
-            const recentOrder = orders[orders.length - 1];
+            const recentOrder = orders.length > 0 ? orders[0] : null;
             if (recentOrder && recentOrder.studentName) {
-                document.getElementById('student-name').value = recentOrder.studentName;
-                document.getElementById('student-id').value = recentOrder.studentId;
-                document.getElementById('student-grade').value = recentOrder.studentGrade;
-                document.getElementById('locker-number').value = recentOrder.lockerNumber;
+                document.getElementById('student-name').value = recentOrder.studentName || '';
+                document.getElementById('student-id').value = recentOrder.studentId || '';
+                document.getElementById('student-grade').value = recentOrder.studentGrade || '';
+                document.getElementById('locker-number').value = recentOrder.lockerNumber || '';
             }
         }
 
@@ -1658,11 +1906,29 @@
             checkoutSection.style.display = 'none';
             adminSection.style.display = 'block';
             
+            // Default to showing orders management
+            showOrderManagementPage();
+            
             // Update active nav link
             document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
             adminLink.classList.add('active');
-            
+        }
+        
+        // New functions for Admin View toggling
+        function showOrderManagementPage() {
+            adminOrdersView.style.display = 'block';
+            adminProductsView.style.display = 'none';
+            showOrdersBtn.classList.remove('btn-secondary');
+            showProductsBtn.classList.add('btn-secondary');
             renderOrders();
+        }
+        
+        function showProductManagementPage() {
+            adminOrdersView.style.display = 'none';
+            adminProductsView.style.display = 'block';
+            showProductsBtn.classList.remove('btn-secondary');
+            showOrdersBtn.classList.add('btn-secondary');
+            renderCurrentProducts();
         }
 
         // Place order function
@@ -1715,7 +1981,7 @@
                 
                 // Show success message
                 const orderMessage = translations[currentLang].orderPlaced
-                    .replace('{total}', `HKD$${order.total.toFixed(2)}`)
+                    .replace('{total}', `$${order.total.toFixed(2)}`)
                     .replace('{locker}', order.lockerNumber);
                 showNotification(orderMessage, 'success');
                 
@@ -1730,19 +1996,24 @@
         function renderOrders() {
             if (!isAdminLoggedIn) return;
             
-            if (orders.length === 0) {
-                ordersContainer.innerHTML = '<p style="text-align: center; padding: 2rem;">No orders yet.</p>';
-                pendingCount.textContent = '0';
-                return;
-            }
-            
-            // Count pending orders
+            // Filter the orders based on currentOrderFilter
+            const filteredOrders = orders.filter(order => {
+                if (currentOrderFilter === 'all') return true;
+                return order.status === currentOrderFilter;
+            });
+
+            // Update pending count based on ALL orders
             const pendingOrders = orders.filter(order => order.status === 'pending');
             pendingCount.textContent = pendingOrders.length;
             
             ordersContainer.innerHTML = '';
             
-            orders.forEach(order => {
+            if (filteredOrders.length === 0) {
+                ordersContainer.innerHTML = '<p style="text-align: center; padding: 2rem;">' + translations[currentLang].noOrdersFiltered + '</p>';
+                return;
+            }
+            
+            filteredOrders.forEach(order => {
                 const orderCard = document.createElement('div');
                 orderCard.className = 'order-card';
                 
@@ -1770,14 +2041,14 @@
                         ${order.items.map(item => `
                             <div class="order-item">
                                 <span>${item.name} x ${item.quantity}</span>
-                                <span>HKD$${(item.price * item.quantity).toFixed(2)}</span>
+                                <span>$${(item.price * item.quantity).toFixed(2)}</span>
                             </div>
                         `).join('')}
                     </div>
                     <div class="order-footer">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <div>
-                                <strong>${translations[currentLang].total} HKD$${order.total.toFixed(2)}</strong>
+                                <strong>${translations[currentLang].total} $${order.total.toFixed(2)}</strong>
                                 ${order.specialNotes ? `<p><small><strong>${translations[currentLang].notes}</strong> ${order.specialNotes}</small></p>` : ''}
                             </div>
                             <div class="order-actions">
@@ -1820,6 +2091,94 @@
             localStorage.setItem('cssSnacksOrders', JSON.stringify(orders));
             renderOrders();
         }
+        
+        // Product Management Logic
+        function getNextProductId() {
+            return products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+        }
+
+        function handleAddProduct(e) {
+            e.preventDefault();
+            
+            const nameEn = document.getElementById('new-product-name-en').value.trim();
+            const nameZh = document.getElementById('new-product-name-zh').value.trim();
+            const price = parseFloat(document.getElementById('new-product-price').value);
+            const image = document.getElementById('new-product-image').value.trim();
+            
+            if (!nameEn || !nameZh || isNaN(price) || price <= 0 || !image) {
+                showNotification(translations[currentLang].fillAllFields, 'error');
+                return;
+            }
+            
+            const newProduct = {
+                id: getNextProductId(),
+                name: { en: nameEn, zh: nameZh },
+                // For simplicity, reuse the same description for new products
+                description: { 
+                    en: translations.en.productDescription, 
+                    zh: translations.zh.productDescription 
+                }, 
+                price: price,
+                image: image
+            };
+            
+            products.unshift(newProduct); // Add new product to the front
+            saveProductsToStorage();
+            addProductForm.reset();
+            renderProducts(); // Re-render products grid on home page
+            renderCurrentProducts(); // Update admin product list
+            
+            showNotification(translations[currentLang].productAdded.replace('{name}', newProduct.name[currentLang]), 'success');
+        }
+        
+        function renderCurrentProducts() {
+            currentProductsList.innerHTML = '';
+            
+            if (products.length === 0) {
+                 currentProductsList.innerHTML = '<p style="text-align: center; padding: 1rem;">' + translations[currentLang].noProducts + '</p>';
+                 return;
+            }
+            
+            products.forEach(product => {
+                const productItem = document.createElement('div');
+                productItem.className = 'admin-product-item';
+                productItem.innerHTML = `
+                    <div style="display: flex; align-items: center;">
+                        <img src="${product.image}" alt="${product.name.en}" onerror="this.onerror=null; this.src='https://via.placeholder.com/50x50?text=No+Image';">
+                        <div class="admin-product-info">
+                            <h4>${product.name[currentLang]}</h4>
+                            <p>$${product.price.toFixed(2)} | ID: ${product.id}</p>
+                        </div>
+                    </div>
+                    <div class="admin-product-actions">
+                        <button data-id="${product.id}" data-action="delete-product">${translations[currentLang].delete}</button>
+                    </div>
+                `;
+                currentProductsList.appendChild(productItem);
+            });
+            
+            // Add event listeners for delete buttons
+            document.querySelectorAll('[data-action="delete-product"]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    deleteProduct(productId);
+                });
+            });
+        }
+
+        function deleteProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const productName = product.name[currentLang];
+            products = products.filter(p => p.id !== productId);
+            saveProductsToStorage();
+            renderProducts(); // Re-render products grid on home page
+            renderCurrentProducts(); // Update admin product list
+            
+            showNotification(translations[currentLang].itemDeleted.replace('{name}', productName), 'info');
+        }
+
 
         // Show notification
         function showNotification(message, type = 'info') {
