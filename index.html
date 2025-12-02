@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Snacks - Creative Secondary School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        :root {
+            --primary: #2c5aa0;
+            --primary-light: #3a6fc9;
+            --primary-dark: #1e4a8a;
+            --secondary: #ff6b35;
+            --secondary-light: #ff8a5a;
+            --secondary-dark: #e55a2b;
+            --light: #f8f9fa;
+            --dark: #333;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --gray-light: #f5f7fa;
+            --gray: #e9ecef;
+            --gray-dark: #495057;
+        }
+        
+        body {
+            background-color: var(--gray-light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .cart-icon:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .language-toggle {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .language-toggle:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--secondary);
+            color: white;
+            font-size: 0.8rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 90, 160, 0.85), rgba(44, 90, 160, 0.8)), url('https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/4edb6e79b7d24c038a6228ac6fb837f1~tplv-a9rns2rl98-image.image?rcl=202512021250410BCD38525286501C98C1&rk3s=8e244e95&rrcfp=f06b921b&x-expires=1767243077&x-signature=ytrVp%2BKcfq1IJxI2oqX3nc9beog%3D');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(44, 90, 160, 0.8) 0%, rgba(44, 90, 160, 0.6) 100%);
+            z-index: 1;
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s;
+            z-index: -1;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-secondary {
+            background-color: var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #1e4a8a;
+        }
+        
+        /* Products Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 15px;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 4rem;
+            justify-items: center;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            width: 100%;
+            max-width: 320px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .product-img {
+            height: 220px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 1.8rem;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 12px;
+            color: var(--primary);
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .product-info p {
+            color: var(--gray-dark);
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .product-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        
+        .add-to-cart {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(44, 90, 160, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .add-to-cart::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(44, 90, 160, 0.4);
+        }
+        
+        .add-to-cart:hover::before {
+            left: 100%;
+        }
+        
+        /* Cart Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background-color: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 15px;
+            overflow: hidden;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            transform: translateY(30px);
+            transition: all 0.3s;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+        
+        .cart-items {
+            margin-bottom: 1.5rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .item-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        .item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .remove-item {
+            color: #dc3545;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .cart-total {
+            background-color: #f8f9fa;
+            padding: 1.2rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .modal-footer {
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Checkout Section */
+        .checkout-section {
+            display: none;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 3rem;
+        }
+        
+        /* Login Modal */
+        .login-modal {
+            display: none;
+        }
+        
+        .login-box {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .login-box h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .login-box p {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .password-input {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .password-input input {
+            width: 100%;
+            padding: 14px 20px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .password-input input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.2);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        /* Admin Section */
+        .admin-section {
+            display: none;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 3rem;
+        }
+        
+        .admin-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .order-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .order-status {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-processed {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .status-delivered {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .order-items {
+            margin-bottom: 1rem;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+        
+        .order-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .logout-btn {
+            background-color: var(--danger);
+            margin-left: 10px;
+        }
+        
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            opacity: 1;
+            transition: opacity 0.5s;
+        }
+        
+        .notification.success {
+            background-color: var(--success);
+        }
+        
+        .notification.error {
+            background-color: var(--danger);
+        }
+        
+        .notification.info {
+            background-color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 1.2rem;
+            font-size: 1.3rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .admin-controls {
+                flex-direction: column;
+            }
+            
+            .login-box {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-cookie-bite"></i>
+                <h1>CSS <span>Snacks</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active" id="home-link">Home</a></li>
+                    <li><a href="#" id="order-link">My Orders</a></li>
+                    <li><a href="#" id="admin-link">Admin</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="cart-icon" id="cart-icon">
+                    <i class="fas fa-shopping-cart fa-lg"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </div>
+                <button class="language-toggle" id="language-toggle">
+                    <span class="lang-en">English</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Delicious Snacks Delivered to Your Locker</h2>
+            <p>Exclusively for Creative Secondary School students. Order your favorite snacks online and we'll deliver them to your locker during break time!</p>
+            <a href="#products" class="btn">Order Now</a>
+        </div>
+    </section>
+
+    <main class="container">
+        <section id="products">
+            <h2 class="section-title">Our Snack Selection</h2>
+            <div class="products-grid" id="products-grid">
+                </div>
+        </section>
+
+        <section class="checkout-section" id="checkout-section">
+            <h2 class="section-title">Checkout</h2>
+            <form id="checkout-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="student-name">Full Name</label>
+                        <input type="text" id="student-name" class="form-control" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="student-id">Student ID</label>
+                        <input type="text" id="student-id" class="form-control" placeholder="Enter your student ID" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="student-grade">Grade/Class</label>
+                        <input type="text" id="student-grade" class="form-control" placeholder="e.g., Grade 10, Class B" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="locker-number">Locker Number</label>
+                        <input type="text" id="locker-number" class="form-control" placeholder="Enter your locker number" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="special-notes">Special Instructions (Optional)</label>
+                    <textarea id="special-notes" class="form-control" rows="3" placeholder="Any allergies or special delivery instructions..."></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn" style="width: 100%;">Place Order</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="admin-section" id="admin-section">
+            <div class="admin-controls">
+                <div>
+                    <h3>Admin Dashboard - Pending Orders: <span id="pending-count">0</span></h3>
+                    <p>Manage student snack orders and update delivery status.</p>
+                </div>
+                <div>
+                    <button class="btn" id="refresh-orders">Refresh Orders</button>
+                    <button class="btn logout-btn" id="logout-btn">Logout</button>
+                </div>
+            </div>
+            <div id="orders-container">
+                </div>
+        </section>
+    </main>
+
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Your Cart</h3>
+                <button class="close-modal" id="close-cart">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="cart-items" id="cart-items">
+                    </div>
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cart-total-price">HKD$0.00</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="continue-shopping">Continue Shopping</button>
+                <button class="btn" id="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal login-modal" id="login-modal">
+        <div class="login-box">
+            <h3>Admin Login</h3>
+            <p>Enter the admin password to access the order management system.</p>
+            <div class="password-input">
+                <input type="password" id="admin-password" placeholder="Enter password" maxlength="7">
+            </div>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="btn" id="login-btn">Login</button>
+                <button class="btn btn-secondary" id="cancel-login">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CSS Snacks</h3>
+                    <p>Exclusive snack delivery service for Creative Secondary School students. Order online, get snacks delivered to your locker.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#order-link">My Orders</a></li>
+                        <li><a href="#admin-link">Admin</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>School Info</h3>
+                    <ul>
+                        <li>Creative Secondary School</li>
+                        <li>Snack Hours: 8:00 AM - 3:15 PM</li>
+                        <li>Delivery to lockers only</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 CSS Snacks. Exclusive service for Creative Secondary School students.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language translations
+        const translations = {
+            en: {
+                siteTitle: "CSS Snacks - Creative Secondary School",
+                logoText: "CSS <span>Snacks</span>",
+                navHome: "Home",
+                navOrders: "My Orders",
+                navAdmin: "Admin",
+                heroTitle: "Delicious Snacks Delivered to Your Locker",
+                heroSubtitle: "Exclusively for Creative Secondary School students. Order your favorite snacks online and we'll deliver them to your locker during break time!",
+                orderNow: "Order Now",
+                sectionTitle: "Our Snack Selection",
+                addToCart: "Add to Cart",
+                yourCart: "Your Cart",
+                close: "Close",
+                continueShopping: "Continue Shopping",
+                checkout: "Proceed to Checkout",
+                total: "Total:",
+                checkoutTitle: "Checkout",
+                fullName: "Full Name",
+                studentId: "Student ID",
+                gradeClass: "Grade/Class",
+                lockerNumber: "Locker Number",
+                specialInstructions: "Special Instructions (Optional)",
+                placeOrder: "Place Order",
+                adminDashboard: "Admin Dashboard - Pending Orders: ",
+                manageOrders: "Manage student snack orders and update delivery status.",
+                refreshOrders: "Refresh Orders",
+                logout: "Logout",
+                adminLogin: "Admin Login",
+                enterPassword: "Enter the admin password to access the order management system.",
+                password: "Enter password",
+                login: "Login",
+                cancel: "Cancel",
+                order: "Order",
+                pending: "Pending",
+                processed: "Processed",
+                delivered: "Delivered",
+                notes: "Notes:",
+                processOrder: "Process Order",
+                markAsDelivered: "Mark as Delivered",
+                orderPlaced: "Order placed successfully! Total: {total}. Your snacks will be delivered to locker {locker}.",
+                cartEmpty: "Your cart is empty. Add some snacks before placing an order.",
+                loginSuccess: "Admin login successful!",
+                loginFailed: "Incorrect password. Please try again.",
+                logoutSuccess: "Admin logged out successfully.",
+                orderProcessed: "Order #{id} marked as processed. Ready for locker delivery.",
+                orderDelivered: "Order #{id} marked as delivered to locker {locker}.",
+                itemAdded: "{name} added to cart!",
+                itemRemoved: "Item removed from cart",
+                footerAbout: "CSS Snacks",
+                footerAboutText: "Exclusive snack delivery service for Creative Secondary School students. Order online, get snacks delivered to your locker.",
+                footerQuickLinks: "Quick Links",
+                footerSchoolInfo: "School Info",
+                // footerAddress: "3 Pung Loi Road, Tseung Kwan O", // REMOVED
+                footerHours: "Snack Hours: 8:00 AM - 3:15 PM",
+                footerDelivery: "Delivery to lockers only",
+                copyright: "&copy; 2025 CSS Snacks. Exclusive service for Creative Secondary School students."
+            },
+            zh: {
+                siteTitle: "CSS 零食 - 创新中学",
+                logoText: "CSS <span>零食</span>",
+                navHome: "首页",
+                navOrders: "我的订单",
+                navAdmin: "管理员",
+                heroTitle: "美味零食送到您的储物柜",
+                heroSubtitle: "专为创新中学学生提供。在线订购您喜爱的零食，我们会在课间休息时送到您的储物柜！",
+                orderNow: "立即订购",
+                sectionTitle: "我们的零食选择",
+                addToCart: "加入购物车",
+                yourCart: "您的购物车",
+                close: "关闭",
+                continueShopping: "继续购物",
+                checkout: "前往结账",
+                total: "总计:",
+                checkoutTitle: "结账",
+                fullName: "全名",
+                studentId: "学生证号",
+                gradeClass: "年级/班级",
+                lockerNumber: "储物柜号码",
+                specialInstructions: "特殊说明（可选）",
+                placeOrder: "提交订单",
+                adminDashboard: "管理员面板 - 待处理订单: ",
+                manageOrders: "管理学生零食订单并更新配送状态。",
+                refreshOrders: "刷新订单",
+                logout: "退出登录",
+                adminLogin: "管理员登录",
+                enterPassword: "输入管理员密码以访问订单管理系统。",
+                password: "输入密码",
+                login: "登录",
+                cancel: "取消",
+                order: "订单",
+                pending: "待处理",
+                processed: "已处理",
+                delivered: "已送达",
+                notes: "备注:",
+                processOrder: "处理订单",
+                markAsDelivered: "标记为已送达",
+                orderPlaced: "订单提交成功！总计: {total}。您的零食将送到储物柜 {locker}。",
+                cartEmpty: "您的购物车是空的。请先添加一些零食再提交订单。",
+                loginSuccess: "管理员登录成功！",
+                loginFailed: "密码不正确。请重试。",
+                logoutSuccess: "管理员已成功退出登录。",
+                orderProcessed: "订单 #{id} 已标记为处理中。准备送到储物柜。",
+                orderDelivered: "订单 #{id} 已标记为送达储物柜 {locker}。",
+                itemAdded: "{name} 已加入购物车！",
+                itemRemoved: "商品已从购物车中移除",
+                footerAbout: "CSS 零食",
+                footerAboutText: "专为创新中学学生提供的零食配送服务。在线订购，零食送到您的储物柜。",
+                footerQuickLinks: "快速链接",
+                footerSchoolInfo: "学校信息",
+                // footerAddress: "将军澳蓬萊路3號", // REMOVED
+                footerHours: "零食时间: 上午8:00 - 下午3:15",
+                footerDelivery: "仅配送至储物柜",
+                copyright: "&copy; 2025 CSS 零食。专为创新中学学生提供的服务。"
+            }
+        };
+        
+        // Current language
+        let currentLang = localStorage.getItem('cssSnacksLang') || 'en';
+        
+        // Sample snack products - only 肉脯
+        const products = [
+            { 
+                id: 1, 
+                name: {
+                    en: "Pork Jerky",
+                    zh: "肉脯"
+                }, 
+                description: {
+                    en: "Premium pork selected and traditionally crafted, with a sweet and chewy texture. Perfect snack to recharge energy during breaks.",
+                    zh: "精选优质猪肉，传统工艺制作，口感香甜有嚼劲，是课间补充能量的理想零食。"
+                }, 
+                price: 20.00, 
+                image: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1501719191858839580~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1780203061&x-signature=W4ca5TaZVw0%2Bo0wuAQQnLYZSJ0Y%3D" 
+            }
+        ];
+
+        // Admin password
+        const ADMIN_PASSWORD = "9348573";
+
+        // Cart and orders data
+        let cart = JSON.parse(localStorage.getItem('cssSnacksCart')) || [];
+        let orders = JSON.parse(localStorage.getItem('cssSnacksOrders')) || [];
+        let isAdminLoggedIn = false;
+
+        // DOM Elements
+        const productsGrid = document.getElementById('products-grid');
+        const cartCount = document.getElementById('cart-count');
+        const cartIcon = document.getElementById('cart-icon');
+        const cartModal = document.getElementById('cart-modal');
+        const closeCart = document.getElementById('close-cart');
+        const cartItems = document.getElementById('cart-items');
+        const cartTotalPrice = document.getElementById('cart-total-price');
+        const continueShopping = document.getElementById('continue-shopping');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const checkoutSection = document.getElementById('checkout-section');
+        const adminSection = document.getElementById('admin-section');
+        const homeLink = document.getElementById('home-link');
+        const orderLink = document.getElementById('order-link');
+        const adminLink = document.getElementById('admin-link');
+        const checkoutForm = document.getElementById('checkout-form');
+        const ordersContainer = document.getElementById('orders-container');
+        const pendingCount = document.getElementById('pending-count');
+        const refreshOrders = document.getElementById('refresh-orders');
+        const loginModal = document.getElementById('login-modal');
+        const adminPasswordInput = document.getElementById('admin-password');
+        const loginBtn = document.getElementById('login-btn');
+        const cancelLogin = document.getElementById('cancel-login');
+        const logoutBtn = document.getElementById('logout-btn');
+        const languageToggle = document.getElementById('language-toggle');
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            updateCartCount();
+            setupEventListeners();
+            showHomePage();
+            
+            // Check if admin was previously logged in
+            const adminSession = localStorage.getItem('cssSnacksAdminSession');
+            if (adminSession && adminSession === "true") {
+                isAdminLoggedIn = true;
+            }
+            
+            // Initialize language
+            updateLanguageDisplay();
+            translatePage();
+        });
+        
+        // Translate page elements
+        function translatePage() {
+            // Set document title
+            document.title = translations[currentLang].siteTitle;
+            
+            // Logo text
+            document.querySelector('.logo h1').innerHTML = translations[currentLang].logoText;
+            
+            // Navigation links
+            document.getElementById('home-link').textContent = translations[currentLang].navHome;
+            document.getElementById('order-link').textContent = translations[currentLang].navOrders;
+            document.getElementById('admin-link').textContent = translations[currentLang].navAdmin;
+            
+            // Hero section
+            document.querySelector('.hero h2').textContent = translations[currentLang].heroTitle;
+            document.querySelector('.hero p').textContent = translations[currentLang].heroSubtitle;
+            document.querySelector('.hero .btn').textContent = translations[currentLang].orderNow;
+            
+            // Products section
+            document.querySelector('#products .section-title').textContent = translations[currentLang].sectionTitle;
+            
+            // Cart modal
+            document.querySelector('#cart-modal .modal-header h3').textContent = translations[currentLang].yourCart;
+            document.getElementById('close-cart').textContent = translations[currentLang].close;
+            document.getElementById('continue-shopping').textContent = translations[currentLang].continueShopping;
+            document.getElementById('checkout-btn').textContent = translations[currentLang].checkout;
+            document.querySelector('.cart-total span:first-child').textContent = translations[currentLang].total;
+            
+            // Checkout section
+            document.querySelector('#checkout-section .section-title').textContent = translations[currentLang].checkoutTitle;
+            document.querySelector('label[for="student-name"]').textContent = translations[currentLang].fullName;
+            document.querySelector('label[for="student-id"]').textContent = translations[currentLang].studentId;
+            document.querySelector('label[for="student-grade"]').textContent = translations[currentLang].gradeClass;
+            document.querySelector('label[for="locker-number"]').textContent = translations[currentLang].lockerNumber;
+            document.querySelector('label[for="special-notes"]').textContent = translations[currentLang].specialInstructions;
+            document.querySelector('#checkout-form button[type="submit"]').textContent = translations[currentLang].placeOrder;
+            
+            // Admin section
+            document.querySelector('.admin-section h3').innerHTML = translations[currentLang].adminDashboard + '<span id="pending-count">0</span>';
+            document.querySelector('.admin-section p').textContent = translations[currentLang].manageOrders;
+            document.getElementById('refresh-orders').textContent = translations[currentLang].refreshOrders;
+            document.getElementById('logout-btn').textContent = translations[currentLang].logout;
+            
+            // Login modal
+            document.querySelector('#login-modal h3').textContent = translations[currentLang].adminLogin;
+            document.querySelector('#login-modal p').textContent = translations[currentLang].enterPassword;
+            document.getElementById('admin-password').placeholder = translations[currentLang].password;
+            document.getElementById('login-btn').textContent = translations[currentLang].login;
+            document.getElementById('cancel-login').textContent = translations[currentLang].cancel;
+            
+            // Footer
+            document.querySelector('.footer-column:nth-child(1) h3').textContent = translations[currentLang].footerAbout;
+            document.querySelector('.footer-column:nth-child(1) p').textContent = translations[currentLang].footerAboutText;
+            document.querySelector('.footer-column:nth-child(2) h3').textContent = translations[currentLang].footerQuickLinks;
+            document.querySelector('.footer-column:nth-child(3) h3').textContent = translations[currentLang].footerSchoolInfo;
+            
+            // Update order status text if admin is logged in
+            if (isAdminLoggedIn) {
+                renderOrders();
+            }
+            
+            // **FIX: Re-render products to apply language change to descriptions**
+            renderProducts(); 
+            
+            // Update cart items if cart is open
+            if (cartModal.classList.contains('active')) {
+                renderCartItems();
+            }
+            
+            // Update image alt text
+            document.querySelectorAll('.product-img img').forEach(img => {
+                const productId = parseInt(img.closest('.product-card').querySelector('.add-to-cart').getAttribute('data-id'));
+                const product = products.find(p => p.id === productId);
+                if (product) {
+                    img.alt = product.name[currentLang];
+                }
+            });
+        }
+        
+        // Update language toggle display
+        function updateLanguageDisplay() {
+            const langText = languageToggle.querySelector('span');
+            langText.textContent = currentLang === 'en' ? 'English' : '中文';
+        }
+
+        // Render products on the page
+        function renderProducts() {
+            productsGrid.innerHTML = '';
+            
+            // Create loading skeleton while images load
+            const skeletonCard = document.createElement('div');
+            skeletonCard.className = 'product-card';
+            skeletonCard.innerHTML = `
+                <div class="product-img bg-gray animate-pulse">
+                    <div class="w-full h-full flex items-center justify-center">
+                        <i class="fas fa-spinner fa-spin text-4xl text-gray-400"></i>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="bg-gray animate-pulse h-6 w-3/4 rounded mb-2"></h3>
+                    <p class="bg-gray animate-pulse h-4 w-full rounded mb-2"></p>
+                    <p class="bg-gray animate-pulse h-4 w-5/6 rounded mb-6"></p>
+                    <div class="product-price">
+                        <span class="price bg-gray animate-pulse h-8 w-1/4 rounded"></span>
+                        <div class="bg-gray animate-pulse h-10 w-10 rounded-full"></div>
+                    </div>
+                </div>
+            `;
+            productsGrid.appendChild(skeletonCard);
+            
+            // Load actual product after a short delay to simulate loading
+            setTimeout(() => {
+                productsGrid.innerHTML = '';
+                products.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    
+                    // Create image element with loading state
+                    const img = document.createElement('img');
+                    img.src = product.image;
+                    img.alt = product.name[currentLang];
+                    img.style.opacity = '0';
+                    img.style.transition = 'opacity 0.5s';
+                    
+                    img.onload = function() {
+                        img.style.opacity = '1';
+                    };
+                    
+                    productCard.innerHTML = `
+                        <div class="product-img">
+                            <div class="w-full h-full flex items-center justify-center bg-gray">
+                                <i class="fas fa-spinner fa-spin text-4xl text-gray-400"></i>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3>${product.name[currentLang]}</h3>
+                            <p>${product.description[currentLang]}</p>
+                            <div class="product-price">
+                                <span class="price">HKD$${product.price.toFixed(2)}</span>
+                                <button class="add-to-cart" data-id="${product.id}">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Replace the spinner with the actual image
+                    const imgContainer = productCard.querySelector('.product-img');
+                    imgContainer.innerHTML = '';
+                    imgContainer.appendChild(img);
+                    
+                    productsGrid.appendChild(productCard);
+                });
+            }, 800);
+        }
+
+        // Update cart count
+        function updateCartCount() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Add to cart buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.add-to-cart')) {
+                    const productId = parseInt(e.target.closest('.add-to-cart').getAttribute('data-id'));
+                    addToCart(productId);
+                }
+            });
+
+            // Cart icon click
+            cartIcon.addEventListener('click', openCart);
+
+            // Close cart modal
+            closeCart.addEventListener('click', closeCartModal);
+            continueShopping.addEventListener('click', closeCartModal);
+
+            // Checkout button
+            checkoutBtn.addEventListener('click', function() {
+                closeCartModal();
+                showCheckoutPage();
+            });
+
+            // Navigation links
+            homeLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showHomePage();
+            });
+
+            orderLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showCheckoutPage();
+            });
+
+            adminLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (isAdminLoggedIn) {
+                    showAdminPage();
+                } else {
+                    showLoginModal();
+                }
+            });
+
+            // Checkout form submission
+            checkoutForm.addEventListener('submit', placeOrder);
+
+            // Refresh orders button
+            refreshOrders.addEventListener('click', renderOrders);
+
+            // Login functionality
+            loginBtn.addEventListener('click', handleLogin);
+            cancelLogin.addEventListener('click', closeLoginModal);
+            
+            // Logout button
+            logoutBtn.addEventListener('click', handleLogout);
+
+            // Enter key in password field
+            adminPasswordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleLogin();
+                }
+            });
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === cartModal) {
+                    closeCartModal();
+                }
+                if (e.target === loginModal) {
+                    closeLoginModal();
+                }
+            });
+            
+            // Language toggle
+            languageToggle.addEventListener('click', function() {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                localStorage.setItem('cssSnacksLang', currentLang);
+                updateLanguageDisplay();
+                translatePage();
+            });
+        }
+
+        // Add product to cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name[currentLang],
+                    price: product.price,
+                    quantity: 1
+                });
+            }
+
+            updateCartCount();
+            saveCartToStorage();
+            
+            // Show a quick notification
+            showNotification(translations[currentLang].itemAdded.replace('{name}', product.name[currentLang]), 'success');
+        }
+
+        // Open cart modal
+        function openCart() {
+            renderCartItems();
+            cartModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        // Close cart modal
+        function closeCartModal() {
+            cartModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore background scrolling
+        }
+
+        // Show login modal
+        function showLoginModal() {
+            adminPasswordInput.value = '';
+            adminPasswordInput.focus();
+            loginModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        // Close login modal
+        function closeLoginModal() {
+            loginModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore background scrolling
+        }
+
+        // Handle login
+        function handleLogin() {
+            const password = adminPasswordInput.value;
+            
+            if (password === ADMIN_PASSWORD) {
+                isAdminLoggedIn = true;
+                localStorage.setItem('cssSnacksAdminSession', "true");
+                closeLoginModal();
+                showAdminPage();
+                showNotification(translations[currentLang].loginSuccess, 'success');
+            } else {
+                showNotification(translations[currentLang].loginFailed, 'error');
+                adminPasswordInput.value = '';
+                adminPasswordInput.focus();
+            }
+        }
+
+        // Handle logout
+        function handleLogout() {
+            isAdminLoggedIn = false;
+            localStorage.removeItem('cssSnacksAdminSession');
+            showHomePage();
+            showNotification(translations[currentLang].logoutSuccess, 'info');
+        }
+
+        // Render cart items in modal
+        function renderCartItems() {
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; padding: 2rem;">' + translations[currentLang].cartEmpty + '</p>';
+                cartTotalPrice.textContent = 'HKD$0.00';
+                checkoutBtn.disabled = true;
+                return;
+            }
+
+            checkoutBtn.disabled = false;
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="item-info">
+                        <h4>${item.name}</h4>
+                        <p>HKD$${item.price.toFixed(2)} each</p>
+                    </div>
+                    <div class="item-actions">
+                        <div class="quantity-control">
+                            <button class="quantity-btn decrease" data-id="${item.id}">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn increase" data-id="${item.id}">+</button>
+                        </div>
+                        <div class="item-price">HKD$${itemTotal.toFixed(2)}</div>
+                        <button class="remove-item" data-id="${item.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+
+            cartTotalPrice.textContent = `HKD$${total.toFixed(2)}`;
+
+            // Add event listeners to quantity buttons and remove buttons
+            document.querySelectorAll('.decrease').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    updateQuantity(id, -1);
+                });
+            });
+
+            document.querySelectorAll('.increase').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    updateQuantity(id, 1);
+                });
+            });
+
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    removeFromCart(id);
+                });
+            });
+        }
+
+        // Update item quantity in cart
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (!item) return;
+
+            item.quantity += change;
+
+            if (item.quantity <= 0) {
+                cart = cart.filter(item => item.id !== productId);
+            }
+
+            updateCartCount();
+            saveCartToStorage();
+            renderCartItems();
+        }
+
+        // Remove item from cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartCount();
+            saveCartToStorage();
+            renderCartItems();
+            
+            // Show notification
+            showNotification(translations[currentLang].itemRemoved, 'info');
+        }
+
+        // Save cart to localStorage
+        function saveCartToStorage() {
+            localStorage.setItem('cssSnacksCart', JSON.stringify(cart));
+        }
+
+        // Show home page
+        function showHomePage() {
+            document.querySelector('#products').style.display = 'block';
+            checkoutSection.style.display = 'none';
+            adminSection.style.display = 'none';
+            
+            // Update active nav link
+            document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+            homeLink.classList.add('active');
+        }
+
+        // Show checkout page
+        function showCheckoutPage() {
+            document.querySelector('#products').style.display = 'none';
+            checkoutSection.style.display = 'block';
+            adminSection.style.display = 'none';
+            
+            // Update active nav link
+            document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+            orderLink.classList.add('active');
+            
+            // Pre-fill form if there's a recent order
+            const recentOrder = orders[orders.length - 1];
+            if (recentOrder && recentOrder.studentName) {
+                document.getElementById('student-name').value = recentOrder.studentName;
+                document.getElementById('student-id').value = recentOrder.studentId;
+                document.getElementById('student-grade').value = recentOrder.studentGrade;
+                document.getElementById('locker-number').value = recentOrder.lockerNumber;
+            }
+        }
+
+        // Show admin page
+        function showAdminPage() {
+            if (!isAdminLoggedIn) {
+                showLoginModal();
+                return;
+            }
+            
+            document.querySelector('#products').style.display = 'none';
+            checkoutSection.style.display = 'none';
+            adminSection.style.display = 'block';
+            
+            // Update active nav link
+            document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+            adminLink.classList.add('active');
+            
+            renderOrders();
+        }
+
+        // Place order function
+        function placeOrder(e) {
+            e.preventDefault();
+            
+            if (cart.length === 0) {
+                showNotification(translations[currentLang].cartEmpty, 'error');
+                return;
+            }
+            
+            // Get form elements
+            const submitBtn = checkoutForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processing...';
+            
+            // Simulate order processing delay
+            setTimeout(() => {
+                const order = {
+                    id: Date.now(),
+                    studentName: document.getElementById('student-name').value,
+                    studentId: document.getElementById('student-id').value,
+                    studentGrade: document.getElementById('student-grade').value,
+                    lockerNumber: document.getElementById('locker-number').value,
+                    specialNotes: document.getElementById('special-notes').value,
+                    items: [...cart],
+                    total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                    status: 'pending',
+                    date: new Date().toLocaleString()
+                };
+                
+                // Add to orders
+                orders.unshift(order);
+                localStorage.setItem('cssSnacksOrders', JSON.stringify(orders));
+                
+                // Clear cart
+                cart = [];
+                saveCartToStorage();
+                updateCartCount();
+                
+                // Reset form
+                checkoutForm.reset();
+                
+                // Restore button state
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+                
+                // Show success message
+                const orderMessage = translations[currentLang].orderPlaced
+                    .replace('{total}', `HKD$${order.total.toFixed(2)}`)
+                    .replace('{locker}', order.lockerNumber);
+                showNotification(orderMessage, 'success');
+                
+                // Show home page
+                setTimeout(() => {
+                    showHomePage();
+                }, 2000);
+            }, 1500);
+        }
+
+        // Render orders in admin panel
+        function renderOrders() {
+            if (!isAdminLoggedIn) return;
+            
+            if (orders.length === 0) {
+                ordersContainer.innerHTML = '<p style="text-align: center; padding: 2rem;">No orders yet.</p>';
+                pendingCount.textContent = '0';
+                return;
+            }
+            
+            // Count pending orders
+            const pendingOrders = orders.filter(order => order.status === 'pending');
+            pendingCount.textContent = pendingOrders.length;
+            
+            ordersContainer.innerHTML = '';
+            
+            orders.forEach(order => {
+                const orderCard = document.createElement('div');
+                orderCard.className = 'order-card';
+                
+                // Get translated status
+                const statusText = translations[currentLang][order.status];
+                
+                // Get translated button text
+                let actionButton = '';
+                if (order.status === 'pending') {
+                    actionButton = `<button class="btn" style="padding: 8px 16px; font-size: 0.9rem;" data-order-id="${order.id}" data-action="process">${translations[currentLang].processOrder}</button>`;
+                } else if (order.status === 'processed') {
+                    actionButton = `<button class="btn" style="padding: 8px 16px; font-size: 0.9rem;" data-order-id="${order.id}" data-action="deliver">${translations[currentLang].markAsDelivered}</button>`;
+                }
+                
+                orderCard.innerHTML = `
+                    <div class="order-header">
+                        <div>
+                            <h4>${translations[currentLang].order} #${order.id}</h4>
+                            <p>${order.studentName} (${order.studentGrade}) - ${translations[currentLang].lockerNumber} ${order.lockerNumber}</p>
+                            <p><small>${order.date}</small></p>
+                        </div>
+                        <div class="order-status status-${order.status}">${statusText}</div>
+                    </div>
+                    <div class="order-items">
+                        ${order.items.map(item => `
+                            <div class="order-item">
+                                <span>${item.name} x ${item.quantity}</span>
+                                <span>HKD$${(item.price * item.quantity).toFixed(2)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="order-footer">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <strong>${translations[currentLang].total} HKD$${order.total.toFixed(2)}</strong>
+                                ${order.specialNotes ? `<p><small><strong>${translations[currentLang].notes}</strong> ${order.specialNotes}</small></p>` : ''}
+                            </div>
+                            <div class="order-actions">
+                                ${actionButton}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                ordersContainer.appendChild(orderCard);
+            });
+            
+            // Add event listeners to order action buttons
+            document.querySelectorAll('[data-action]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const orderId = parseInt(this.getAttribute('data-order-id'));
+                    const action = this.getAttribute('data-action');
+                    updateOrderStatus(orderId, action);
+                });
+            });
+        }
+
+        // Update order status
+        function updateOrderStatus(orderId, action) {
+            const order = orders.find(o => o.id === orderId);
+            if (!order) return;
+            
+            if (action === 'process') {
+                order.status = 'processed';
+                const processMessage = translations[currentLang].orderProcessed
+                    .replace('{id}', orderId);
+                showNotification(processMessage, 'success');
+            } else if (action === 'deliver') {
+                order.status = 'delivered';
+                const deliverMessage = translations[currentLang].orderDelivered
+                    .replace('{id}', orderId)
+                    .replace('{locker}', order.lockerNumber);
+                showNotification(deliverMessage, 'success');
+            }
+            
+            localStorage.setItem('cssSnacksOrders', JSON.stringify(orders));
+            renderOrders();
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            // Remove any existing notification
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
