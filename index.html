@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSS Snacks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -36,6 +36,9 @@
             color: var(--dark);
             line-height: 1.6;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         
         .container {
@@ -251,6 +254,15 @@
             background-color: #1e4a8a;
         }
         
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        
         /* Products Section */
         .section-title {
             text-align: center;
@@ -292,6 +304,8 @@
             position: relative;
             overflow: hidden;
             animation: fadeInUp 0.8s ease-out;
+            display: flex;
+            flex-direction: column;
         }
         
         .product-card::before {
@@ -332,6 +346,9 @@
         
         .product-info {
             padding: 1.8rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         
         .product-info h3 {
@@ -346,6 +363,7 @@
             margin-bottom: 20px;
             font-size: 1rem;
             line-height: 1.6;
+            flex-grow: 1;
         }
         
         .product-price {
@@ -696,12 +714,13 @@
         }
         
         .logout-btn {
-            background-color: var(--danger);
+            background-color: var(--gray-dark);
+            color: white;
             margin-left: 10px;
         }
         
         .logout-btn:hover {
-            background-color: #c82333;
+            background-color: #333;
         }
         
         /* New Filter Button Styles for Admin */
@@ -812,7 +831,7 @@
             background-color: var(--primary);
             color: white;
             padding: 3rem 0 1.5rem;
-            margin-top: 3rem;
+            margin-top: auto;
         }
         
         .footer-content {
@@ -957,7 +976,7 @@
     <section class="hero">
         <div class="container">
             <h2>Delicious Snacks Delivered to Your Locker</h2>
-            <p>Exclusively for Creative Secondary School students. Order your favorite snacks online and we'll deliver them to your locker during break time!</p>
+            <p>Exclusively for CSS students. Order your favorite snacks online and we'll deliver them to your locker during break time!</p>
             <a href="#products" class="btn">Order Now</a>
         </div>
     </section>
@@ -1010,6 +1029,7 @@
                     <div style="margin-top: 15px;">
                         <button class="btn" id="show-orders-btn">Order Management</button>
                         <button class="btn btn-secondary" id="show-products-btn">Product Management</button>
+                        <button class="btn btn-danger" id="reset-system-btn" style="margin-left: 10px;">Reset System Data</button>
                     </div>
                 </div>
                 <div>
@@ -1041,7 +1061,7 @@
                         <input type="text" id="new-product-name-zh" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="new-product-price">Price ($)</label>
+                        <label for="new-product-price">Price (HKD$)</label>
                         <input type="number" step="0.01" min="0.01" id="new-product-price" class="form-control" required>
                     </div>
                     <div class="form-group">
@@ -1070,7 +1090,7 @@
                     </div>
                 <div class="cart-total">
                     <span>Total:</span>
-                    <span id="cart-total-price">$0.00</span>
+                    <span id="cart-total-price">HKD$0.00</span>
                 </div>
             </div>
             <div class="modal-footer">
@@ -1080,7 +1100,7 @@
         </div>
     </div>
 
-    <div class="modal login-modal" id="login-modal">
+    <div class="modal" id="login-modal">
         <div class="login-box">
             <h3>Admin Login</h3>
             <p>Enter the admin password to access the order management system.</p>
@@ -1099,7 +1119,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>CSS Snacks</h3>
-                    <p>Exclusive snack delivery service for Creative Secondary School students. Order online, get snacks delivered to your locker.</p>
+                    <p>Exclusive snack delivery service for CSS students. Order online, get snacks delivered to your locker.</p>
                 </div>
                 <div class="footer-column">
                     <h3>Quick Links</h3>
@@ -1113,7 +1133,7 @@
                 <div class="footer-column">
                     <h3>School Info</h3>
                     <ul>
-                        <li>Creative Secondary School</li>
+                        <li>CSS</li>
                         <li>3 Pung Loi Road, Tseung Kwan O</li>
                         <li>Snack Hours: 8:00 AM - 3:15 PM</li>
                         <li>Delivery to lockers only</li>
@@ -1136,7 +1156,7 @@
                 navOrders: "My Orders",
                 navAdmin: "Admin",
                 heroTitle: "Delicious Snacks Delivered to Your Locker",
-                heroSubtitle: "Exclusively for Creative Secondary School students. Order your favorite snacks online and we'll deliver them to your locker during break time!",
+                heroSubtitle: "Exclusively for CSS students. Order your favorite snacks online and we'll deliver them to your locker during break time!",
                 orderNow: "Order Now",
                 sectionTitle: "Our Snack Selection",
                 productDescription: "Premium pork selected and traditionally crafted, with a sweet and chewy texture. Perfect snack to recharge energy during breaks.",
@@ -1179,7 +1199,7 @@
                 itemAdded: "{name} added to cart!",
                 itemRemoved: "Item removed from cart",
                 footerAbout: "CSS Snacks",
-                footerAboutText: "Exclusive snack delivery service for Creative Secondary School students. Order online, get snacks delivered to your locker.",
+                footerAboutText: "Exclusive snack delivery service for CSS students. Order online, get snacks delivered to your locker.",
                 footerQuickLinks: "Quick Links",
                 footerSchoolInfo: "School Info",
                 footerAddress: "3 Pung Loi Road, Tseung Kwan O",
@@ -1202,16 +1222,17 @@
                 delete: "Delete",
                 itemDeleted: "{name} deleted successfully!",
                 productAdded: "{name} added successfully!",
-                fillAllFields: "Please fill out all product fields correctly."
+                fillAllFields: "Please fill out all product fields correctly.",
+                resetSuccess: "System data reset successfully. Products and orders cleared."
             },
             zh: {
-                siteTitle: "CSS 零食 - 创新中学",
+                siteTitle: "CSS 零食",
                 logoText: "CSS <span>零食</span>",
                 navHome: "首页",
                 navOrders: "我的订单",
                 navAdmin: "管理员",
                 heroTitle: "美味零食送到您的储物柜",
-                heroSubtitle: "专为创新中学学生提供。在线订购您喜爱的零食，我们会在课间休息时送到您的储物柜！",
+                heroSubtitle: "专为CSS学生提供。在线订购您喜爱的零食，我们会在课间休息时送到您的储物柜！",
                 orderNow: "立即订购",
                 sectionTitle: "我们的零食选择",
                 productDescription: "精选优质猪肉，传统工艺制作，口感香甜有嚼劲，是课间补充能量的理想零食。",
@@ -1254,13 +1275,13 @@
                 itemAdded: "{name} 已加入购物车！",
                 itemRemoved: "商品已从购物车中移除",
                 footerAbout: "CSS 零食",
-                footerAboutText: "专为创新中学学生提供的零食配送服务。在线订购，零食送到您的储物柜。",
+                footerAboutText: "专为CSS学生提供的零食配送服务。在线订购，零食送到您的储物柜。",
                 footerQuickLinks: "快速链接",
                 footerSchoolInfo: "学校信息",
                 footerAddress: "将军澳蓬萊路3號",
                 footerHours: "零食时间: 上午8:00 - 下午3:15",
                 footerDelivery: "仅配送至储物柜",
-                copyright: "&copy; 2025 CSS 零食。专为创新中学学生提供的服务。",
+                copyright: "&copy; 2025 CSS 零食。专为CSS学生提供的服务。",
                 // NEW ADMIN STRINGS
                 adminOrderManagement: "订单管理",
                 adminProductManagement: "产品管理",
@@ -1277,14 +1298,19 @@
                 delete: "删除",
                 itemDeleted: "{name} 已成功删除！",
                 productAdded: "{name} 添加成功！",
-                fillAllFields: "请正确填写所有产品字段。"
+                fillAllFields: "请正确填写所有产品字段。",
+                resetSuccess: "系统数据已重置。产品和订单已清除。"
             }
         };
         
         // Current language
         let currentLang = localStorage.getItem('cssSnacksLang') || 'en';
         
-        // Sample snack products - only 肉脯
+        // Use a versioned key to force update on clients who have old data
+        const STORAGE_KEY_PRODUCTS = 'cssSnacksProducts_v2'; 
+        const STORAGE_KEY_ORDERS = 'cssSnacksOrders_v2';
+        
+        // Sample snack products - Updated with correct price and more items
         const defaultProducts = [
             { 
                 id: 1, 
@@ -1293,20 +1319,59 @@
                     zh: "肉脯"
                 }, 
                 description: {
-                    en: translations.en.productDescription,
-                    zh: translations.zh.productDescription
+                    en: "Premium pork selected and traditionally crafted, with a sweet and chewy texture. Perfect snack to recharge energy during breaks.",
+                    zh: "精选优质猪肉，传统工艺制作，口感香甜有嚼劲，是课间补充能量的理想零食。"
                 }, 
-                price: 18.50, 
-                image: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1501719191858839580~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1780203061&x-signature=W4ca5TaZVw0%2Bo0wuAQQnLYZSJ0Y%3D" 
+                price: 20.00, 
+                image: "https://uploads.onecompiler.io/4435mft87/446c8s53w/Screenshot%202025-12-02%20at%2012.54.22%E2%80%AFPM.png" 
+            },
+            { 
+                id: 2, 
+                name: {
+                    en: "Seaweed",
+                    zh: "海苔"
+                }, 
+                description: {
+                    en: "Crispy and savory roasted seaweed sheets. A light and healthy snack alternative.",
+                    zh: "香脆可口的烤海苔片。健康轻食零食的不二之选。"
+                }, 
+                price: 8.00, 
+                image: "https://placehold.co/400x300/2c5aa0/white?text=Seaweed" 
+            },
+            { 
+                id: 3, 
+                name: {
+                    en: "Lemon Tea",
+                    zh: "柠檬茶"
+                }, 
+                description: {
+                    en: "Refreshing ice cold lemon tea drink to cool you down.",
+                    zh: "清爽冰凉的柠檬茶饮料，为您降温解渴。"
+                }, 
+                price: 6.50, 
+                image: "https://placehold.co/400x300/ff6b35/white?text=Lemon+Tea" 
+            },
+            { 
+                id: 4, 
+                name: {
+                    en: "Chocolate Cookie",
+                    zh: "巧克力曲奇"
+                }, 
+                description: {
+                    en: "Rich chocolate chip cookies, baked fresh daily.",
+                    zh: "浓郁的巧克力曲奇，每日新鲜烘焙。"
+                }, 
+                price: 12.00, 
+                image: "https://placehold.co/400x300/5a3a2a/white?text=Cookie" 
             }
         ];
         
         // Load products from storage, or use default if none exist
-        let products = JSON.parse(localStorage.getItem('cssSnacksProducts')) || defaultProducts;
+        let products = JSON.parse(localStorage.getItem(STORAGE_KEY_PRODUCTS)) || defaultProducts;
 
         // Save products to localStorage
         function saveProductsToStorage() {
-            localStorage.setItem('cssSnacksProducts', JSON.stringify(products));
+            localStorage.setItem(STORAGE_KEY_PRODUCTS, JSON.stringify(products));
         }
 
         // Admin password
@@ -1314,8 +1379,9 @@
 
         // Cart and orders data
         let cart = JSON.parse(localStorage.getItem('cssSnacksCart')) || [];
-        let orders = JSON.parse(localStorage.getItem('cssSnacksOrders')) || [];
-        let isAdminLoggedIn = false;
+        let orders = JSON.parse(localStorage.getItem(STORAGE_KEY_ORDERS)) || [];
+        // ADMIN LOGIN STATE: Now only stored in memory for the session, not persistent
+        let isAdminLoggedIn = false; 
         let currentOrderFilter = 'all'; // New state for admin order filtering
 
         // DOM Elements
@@ -1351,12 +1417,13 @@
         const showProductsBtn = document.getElementById('show-products-btn');
         const addProductForm = document.getElementById('add-product-form');
         const currentProductsList = document.getElementById('current-products-list');
+        const resetSystemBtn = document.getElementById('reset-system-btn');
 
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize products in storage if it's the first load
-            if (!localStorage.getItem('cssSnacksProducts')) {
+            if (!localStorage.getItem(STORAGE_KEY_PRODUCTS)) {
                 saveProductsToStorage();
             }
             
@@ -1365,11 +1432,9 @@
             setupEventListeners();
             showHomePage();
             
-            // Check if admin was previously logged in
-            const adminSession = localStorage.getItem('cssSnacksAdminSession');
-            if (adminSession && adminSession === "true") {
-                isAdminLoggedIn = true;
-            }
+            // FIX: Removed automatic admin login persistence check here.
+            // Now, isAdminLoggedIn defaults to false on every page load,
+            // forcing the user to log in when clicking "Admin."
             
             // Initialize language
             updateLanguageDisplay();
@@ -1489,25 +1554,28 @@
                  return;
             }
             
-            const skeletonCard = document.createElement('div');
-            skeletonCard.className = 'product-card';
-            skeletonCard.innerHTML = `
-                <div class="product-img bg-gray animate-pulse">
-                    <div class="w-full h-full flex items-center justify-center">
-                        <i class="fas fa-spinner fa-spin text-4xl text-gray-400"></i>
+            // Create multiple skeletons based on product count
+            for(let i=0; i<products.length; i++) {
+                const skeletonCard = document.createElement('div');
+                skeletonCard.className = 'product-card';
+                skeletonCard.innerHTML = `
+                    <div class="product-img bg-gray animate-pulse">
+                        <div class="w-full h-full flex items-center justify-center">
+                            <i class="fas fa-spinner fa-spin text-4xl text-gray-400"></i>
+                        </div>
                     </div>
-                </div>
-                <div class="product-info">
-                    <h3 class="bg-gray animate-pulse h-6 w-3/4 rounded mb-2"></h3>
-                    <p class="bg-gray animate-pulse h-4 w-full rounded mb-2"></p>
-                    <p class="bg-gray animate-pulse h-4 w-5/6 rounded mb-6"></p>
-                    <div class="product-price">
-                        <span class="price bg-gray animate-pulse h-8 w-1/4 rounded"></span>
-                        <div class="bg-gray animate-pulse h-10 w-10 rounded-full"></div>
+                    <div class="product-info">
+                        <h3 class="bg-gray animate-pulse h-6 w-3/4 rounded mb-2"></h3>
+                        <p class="bg-gray animate-pulse h-4 w-full rounded mb-2"></p>
+                        <p class="bg-gray animate-pulse h-4 w-5/6 rounded mb-6"></p>
+                        <div class="product-price">
+                            <span class="price bg-gray animate-pulse h-8 w-1/4 rounded"></span>
+                            <div class="bg-gray animate-pulse h-10 w-10 rounded-full"></div>
+                        </div>
                     </div>
-                </div>
-            `;
-            productsGrid.appendChild(skeletonCard);
+                `;
+                productsGrid.appendChild(skeletonCard);
+            }
             
             // Load actual product after a short delay to simulate loading
             setTimeout(() => {
@@ -1530,6 +1598,13 @@
                         img.style.opacity = '1';
                     };
                     
+                    img.onerror = function() {
+                        this.src = 'https://placehold.co/400x300/2c5aa0/white?text=No+Image';
+                        const spinnerContainer = productCard.querySelector('.product-img > div');
+                        if (spinnerContainer) spinnerContainer.remove();
+                        this.style.opacity = '1';
+                    };
+                    
                     productCard.innerHTML = `
                         <div class="product-img">
                             <div style="position: absolute; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background-color: #f0f0f0;">
@@ -1540,7 +1615,7 @@
                             <h3>${product.name[currentLang]}</h3>
                             <p>${product.description[currentLang]}</p>
                             <div class="product-price">
-                                <span class="price">$${product.price.toFixed(2)}</span>
+                                <span class="price">HKD$${product.price.toFixed(2)}</span>
                                 <button class="add-to-cart" data-id="${product.id}">
                                     <i class="fas fa-plus"></i>
                                 </button>
@@ -1606,7 +1681,7 @@
                 }
             });
             
-            // Footer Navigation Links (RESTORED FUNCTIONALITY)
+            // Footer Navigation Links
             document.getElementById('footer-home').addEventListener('click', function(e) {
                 e.preventDefault();
                 showHomePage();
@@ -1644,6 +1719,24 @@
             // Admin Orders/Products View Toggle
             showOrdersBtn.addEventListener('click', showOrderManagementPage);
             showProductsBtn.addEventListener('click', showProductManagementPage);
+            
+            // Reset System Button
+            resetSystemBtn.addEventListener('click', function() {
+                if(confirm('Are you sure you want to reset all data? This will clear all orders and reset products to default.')) {
+                    localStorage.removeItem(STORAGE_KEY_PRODUCTS);
+                    localStorage.removeItem(STORAGE_KEY_ORDERS);
+                    // Reload defaults
+                    products = [...defaultProducts];
+                    orders = [];
+                    saveProductsToStorage();
+                    localStorage.setItem(STORAGE_KEY_ORDERS, JSON.stringify(orders));
+                    
+                    renderProducts();
+                    renderOrders();
+                    renderCurrentProducts();
+                    showNotification(translations[currentLang].resetSuccess, 'success');
+                }
+            });
             
             // Admin Order Status Filters
             document.querySelectorAll('.status-filter').forEach(btn => {
@@ -1696,7 +1789,7 @@
             const product = products.find(p => p.id === productId);
             const existingItem = cart.find(item => item.id === productId);
 
-            if (!product) return; // Should not happen
+            if (!product) return; 
 
             if (existingItem) {
                 existingItem.quantity += 1;
@@ -1749,7 +1842,7 @@
             
             if (password === ADMIN_PASSWORD) {
                 isAdminLoggedIn = true;
-                localStorage.setItem('cssSnacksAdminSession', "true");
+                // FIX: Removed persistence setting. Session is now only in memory (isAdminLoggedIn = true)
                 closeLoginModal();
                 showAdminPage();
                 showNotification(translations[currentLang].loginSuccess, 'success');
@@ -1763,7 +1856,7 @@
         // Handle logout
         function handleLogout() {
             isAdminLoggedIn = false;
-            localStorage.removeItem('cssSnacksAdminSession');
+            // Persistence logic has been removed. No need to clear local storage.
             showHomePage();
             showNotification(translations[currentLang].logoutSuccess, 'info');
         }
@@ -1772,7 +1865,7 @@
         function renderCartItems() {
             if (cart.length === 0) {
                 cartItems.innerHTML = '<p style="text-align: center; padding: 2rem;">' + translations[currentLang].cartEmpty + '</p>';
-                cartTotalPrice.textContent = '$0.00';
+                cartTotalPrice.textContent = 'HKD$0.00';
                 checkoutBtn.disabled = true;
                 return;
             }
@@ -1790,7 +1883,7 @@
                 cartItem.innerHTML = `
                     <div class="item-info">
                         <h4>${item.name}</h4>
-                        <p>$${item.price.toFixed(2)} each</p>
+                        <p>HKD$${item.price.toFixed(2)} each</p>
                     </div>
                     <div class="item-actions">
                         <div class="quantity-control">
@@ -1798,7 +1891,7 @@
                             <span>${item.quantity}</span>
                             <button class="quantity-btn increase" data-id="${item.id}">+</button>
                         </div>
-                        <div class="item-price">$${itemTotal.toFixed(2)}</div>
+                        <div class="item-price">HKD$${itemTotal.toFixed(2)}</div>
                         <button class="remove-item" data-id="${item.id}">
                             <i class="fas fa-trash"></i>
                         </button>
@@ -1807,7 +1900,7 @@
                 cartItems.appendChild(cartItem);
             });
 
-            cartTotalPrice.textContent = `$${total.toFixed(2)}`;
+            cartTotalPrice.textContent = `HKD$${total.toFixed(2)}`;
 
             // Add event listeners to quantity buttons and remove buttons
             document.querySelectorAll('.decrease').forEach(btn => {
@@ -1965,7 +2058,7 @@
                 
                 // Add to orders
                 orders.unshift(order);
-                localStorage.setItem('cssSnacksOrders', JSON.stringify(orders));
+                localStorage.setItem(STORAGE_KEY_ORDERS, JSON.stringify(orders));
                 
                 // Clear cart
                 cart = [];
@@ -1981,7 +2074,7 @@
                 
                 // Show success message
                 const orderMessage = translations[currentLang].orderPlaced
-                    .replace('{total}', `$${order.total.toFixed(2)}`)
+                    .replace('{total}', `HKD$${order.total.toFixed(2)}`)
                     .replace('{locker}', order.lockerNumber);
                 showNotification(orderMessage, 'success');
                 
@@ -2041,14 +2134,14 @@
                         ${order.items.map(item => `
                             <div class="order-item">
                                 <span>${item.name} x ${item.quantity}</span>
-                                <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                                <span>HKD$${(item.price * item.quantity).toFixed(2)}</span>
                             </div>
                         `).join('')}
                     </div>
                     <div class="order-footer">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <div>
-                                <strong>${translations[currentLang].total} $${order.total.toFixed(2)}</strong>
+                                <strong>${translations[currentLang].total} HKD$${order.total.toFixed(2)}</strong>
                                 ${order.specialNotes ? `<p><small><strong>${translations[currentLang].notes}</strong> ${order.specialNotes}</small></p>` : ''}
                             </div>
                             <div class="order-actions">
@@ -2088,7 +2181,7 @@
                 showNotification(deliverMessage, 'success');
             }
             
-            localStorage.setItem('cssSnacksOrders', JSON.stringify(orders));
+            localStorage.setItem(STORAGE_KEY_ORDERS, JSON.stringify(orders));
             renderOrders();
         }
         
@@ -2144,10 +2237,10 @@
                 productItem.className = 'admin-product-item';
                 productItem.innerHTML = `
                     <div style="display: flex; align-items: center;">
-                        <img src="${product.image}" alt="${product.name.en}" onerror="this.onerror=null; this.src='https://via.placeholder.com/50x50?text=No+Image';">
+                        <img src="${product.image}" alt="${product.name.en}" onerror="this.onerror=null; this.src='https://placehold.co/50x50/2c5aa0/white?text=Img';">
                         <div class="admin-product-info">
                             <h4>${product.name[currentLang]}</h4>
-                            <p>$${product.price.toFixed(2)} | ID: ${product.id}</p>
+                            <p>HKD$${product.price.toFixed(2)} | ID: ${product.id}</p>
                         </div>
                     </div>
                     <div class="admin-product-actions">
